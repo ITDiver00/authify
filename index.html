@@ -8,5 +8,60 @@
 <body>
     <h1>Welcome to My GitHub Pages Site!</h1>
     <p>This is a static website hosted on GitHub Pages.</p>
+
+    <div id="login-container"></div>
+    <button id="login-btn">Login with Okta</button>
+    <button id="logout-btn" style="display:none;">Logout</button>
+    <div id="user-info"></div>
+
+    <script src="https://global.oktacdn.com/okta-auth-js/7.4.0/okta-auth-js.min.js"></script>
+    <script>
+      // Replace these with your Okta app settings
+      const oktaDomain = 'https://YOUR_OKTA_DOMAIN.okta.com';
+      const clientId = 'YOUR_CLIENT_ID';
+      const redirectUri = window.location.origin + '/';
+
+      const authClient = new OktaAuth({
+        issuer: oktaDomain + '/oauth2/default',
+        clientId: clientId,
+        redirectUri: redirectUri,
+        scopes: ['openid', 'profile', 'email'],
+        pkce: true
+      });
+
+      async function handleLogin() {
+        await authClient.token.getWithRedirect({
+          responseType: ['token', 'id_token']
+        });
+      }
+
+      async function handleLogout() {
+        await authClient.signOut();
+      }
+
+      async function checkAuth() {
+        const tokens = authClient.tokenManager.getTokensSync();
+        if (tokens.idToken) {
+          document.getElementById('login-btn').style.display = 'none';
+          document.getElementById('logout-btn').style.display = 'inline-block';
+          document.getElementById('user-info').innerText = 'Hello, ' + tokens.idToken.claims.name;
+        } else {
+          document.getElementById('login-btn').style.display = 'inline-block';
+          document.getElementById('logout-btn').style.display = 'none';
+          document.getElementById('user-info').innerText = '';
+        }
+      }
+
+      // Handle redirect callback
+      authClient.token.parseFromUrl().then(function(res) {
+        authClient.tokenManager.setTokens(res.tokens);
+        window.location.replace('/');
+      }).catch(function() {
+        // Not a redirect callback
+      }).finally(checkAuth);
+
+      document.getElementById('login-btn').onclick = handleLogin;
+      document.getElementById('logout-btn').onclick = handleLogout;
+    </script>
 </body>
 </html>
