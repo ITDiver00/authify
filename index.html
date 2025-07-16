@@ -56,7 +56,7 @@
       // Handle redirect callback
       authClient.token.parseFromUrl().then(function(res) {
         authClient.tokenManager.setTokens(res.tokens);
-        window.location.replace('/');
+        window.location.replace('/authify/');
       }).catch(function() {
         // Not a redirect callback
       }).finally(checkAuth);
