@@ -2,7 +2,8 @@ import os
 
 
 def create_github_pages_site():
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # Ensure files are created in the /authify folder
+    project_root = os.path.dirname(os.path.abspath(__file__))
 
     # HTML content
     html_content = """<!DOCTYPE html>
@@ -30,7 +31,7 @@ def create_github_pages_site():
     # README
     readme_content = "# My GitHub Pages Site\nA simple static website ready for GitHub Pages."
 
-    # Write files directly to the project root
+    # Write files directly to the /authify folder
     with open(os.path.join(project_root, "index.html"), "w") as f:
         f.write(html_content)
 
@@ -40,7 +41,7 @@ def create_github_pages_site():
     with open(os.path.join(project_root, "README.md"), "w") as f:
         f.write(readme_content)
 
-    print("✅ Website files created in the project root directory.")
+    print("✅ Website files created in the /authify directory.")
     print("\n👉 Next steps:")
     print("1. Push these files to a GitHub repository.")
     print("2. Go to 'Settings' > 'Pages' and select 'main' branch (root).")
