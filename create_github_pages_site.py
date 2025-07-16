@@ -1,5 +1,6 @@
 import os
 
+
 def create_github_pages_site():
     # HTML content
     html_content = """<!DOCTYPE html>
@@ -42,6 +43,7 @@ def create_github_pages_site():
     print("1. Push these files to a GitHub repository.")
     print("2. Go to 'Settings' > 'Pages' and select 'main' branch (root).")
     print("3. Your site will be available at: https://<your-username>.github.io/<repo-name>/")
+
 
 if __name__ == "__main__":
     create_github_pages_site()
