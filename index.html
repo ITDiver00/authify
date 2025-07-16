@@ -19,7 +19,8 @@
       // Replace these with your Okta app settings
       const oktaDomain = 'https://lundencloud.oktapreview.com';
       const clientId = '0oab7bfwd8XVfcQQj0x7';
-      const redirectUri = window.location.origin + '/';
+          // Use your actual GitHub Pages URL as redirectUri
+      const redirectUri = 'https://itdiver00.github.io/authify/';
 
       const authClient = new OktaAuth({
         issuer: oktaDomain + '/oauth2/default',
