@@ -32,7 +32,8 @@
 
       async function handleLogin() {
         await authClient.token.getWithRedirect({
-          responseType: ['token', 'id_token']
+          responseType: ['token', 'id_token'],
+          prompt: 'login'
         });
       }
 
