@@ -37,7 +37,9 @@
       }
 
       async function handleLogout() {
-        await authClient.signOut();
+        await authClient.signOut({
+          postLogoutRedirectUri: redirectUri // Redirects back to your site after logout
+        });
       }
 
       async function checkAuth() {
