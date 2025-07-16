@@ -2,6 +2,8 @@ import os
 
 
 def create_github_pages_site():
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
     # HTML content
     html_content = """<!DOCTYPE html>
 <html lang="en">
@@ -28,17 +30,17 @@ def create_github_pages_site():
     # README
     readme_content = "# My GitHub Pages Site\nA simple static website ready for GitHub Pages."
 
-    # Write files directly to the root (current working directory)
-    with open("index.html", "w") as f:
+    # Write files directly to the project root
+    with open(os.path.join(project_root, "index.html"), "w") as f:
         f.write(html_content)
 
-    with open("style.css", "w") as f:
+    with open(os.path.join(project_root, "style.css"), "w") as f:
         f.write(css_content)
 
-    with open("README.md", "w") as f:
+    with open(os.path.join(project_root, "README.md"), "w") as f:
         f.write(readme_content)
 
-    print("✅ Website files created in the current directory (root).")
+    print("✅ Website files created in the project root directory.")
     print("\n👉 Next steps:")
     print("1. Push these files to a GitHub repository.")
     print("2. Go to 'Settings' > 'Pages' and select 'main' branch (root).")
